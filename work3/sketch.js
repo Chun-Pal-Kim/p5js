@@ -1,6 +1,13 @@
 let mousePresedTime = 0;
 let mousePressed = false;
+let mouseFirstPress = false;
 
+
+//#region faceLet
+let faceOffsetX = 50;
+let faceOffsetY = 0;
+
+//#endregion
 function setup() {
   createCanvas(400, 400);
   background(220);
@@ -12,14 +19,16 @@ function draw() {
   
   MouseInputSetting();
   
-  FaceBackGround(200, 200);
-  DrawEyes(200, 180 + 30);
-  DrawGlasses(200 , 180 + 30);
-  DrawNose(200, 220 + 30);
-  DrawMouth(200, 260 + 30);
-  DrawHair(200, 100);
+  FaceBackGround(200 + faceOffsetX, 200 + faceOffsetY);
   
-  console.log(mousePresedTime);
+ 
+  DrawEyes(200 + faceOffsetX, 210 + faceOffsetY);
+  DrawGlasses(200 + faceOffsetX , 210  + faceOffsetY);
+  DrawNose(200 + faceOffsetX, 250  + faceOffsetY);
+  DrawMouth(200 + faceOffsetX, 290  + faceOffsetY);
+  DrawHair(200 + faceOffsetX, 100  + faceOffsetY);
+  
+
 }
 
 function MouseInputSetting(){
@@ -27,9 +36,12 @@ function MouseInputSetting(){
     
     if (!mousePressed){
       mousePressed = true;
+      mouseFirstPress = true;
     }
     
     mousePresedTime += deltaTime * 0.001;
+
+    DrawEyeLaser();
 
   }
 }
@@ -39,6 +51,10 @@ function mouseReleased(){
   mousePressed = false;
   
 }
+//#region face
+
+
+
 function FaceBackGround(xPos, yPos) {
   noStroke();
   fill('#a08472'); // 피부색
@@ -60,7 +76,8 @@ function DrawEyes(x, y) {
   if (mousePressed){
     DrawEyeLaser(x , y);
   }
-  else{
+  
+  if (!mouseFirstPress){
       ellipse(x - 50 + eyeOffsetX, y + eyeOffsetY, 15, 15); // 왼쪽 눈동자
   ellipse(x + 50 + eyeOffsetX, y + eyeOffsetY, 15, 15); // 오른쪽 눈동자
   }
@@ -68,9 +85,7 @@ function DrawEyes(x, y) {
   
 }
 
-function DrawEyeLaser( x , y){
-  
-}
+
 
 function DrawGlasses(x,y){
   
@@ -150,6 +165,56 @@ function DrawHair(x, y) {
   
   // 귀 추가
   fill('#a08472'); // 귀 색
-  ellipse(x - 125, y + 100, 20, 70); // 왼쪽 귀
-  ellipse(x + 125, y + 100, 20, 70); // 오른쪽 귀
+  ellipse(x - 125, y + 100 , 20, 70); // 왼쪽 귀
+  ellipse(x + 125 , y + 100 , 20, 70); // 오른쪽 귀
 }
+
+//#endregion
+
+//#region InputEvent
+function DrawEyeLaser( x , y){
+   let laserLength = (mousePresedTime > 0.7 ? 0.7 : mousePresedTime) * 400; 
+
+  noStroke();
+  fill(255, 0, 0, 150); // 빨간색 반투명 레이저
+
+  let rightEyeMouseDirection = createVector(mouseX - (x -50) , mouseY - (y));
+  let leftEyeMouseDirection = createVector(mouseX - (x + 50) , mouseY - (y));
+  
+rightEyeMouseDirection.normalize();
+ leftEyeMouseDirection.normalize();
+  // 왼쪽 눈에서 쏘는 레이저 (왼쪽 눈 위치: x - 50, y)  
+
+
+  triangle(
+    x - 50, y,                // 눈 중심
+    x - 50 + laserLength * leftEyeMouseDirection.x, y - 20  + laserLength * leftEyeMouseDirection.y,  // 왼쪽으로 뻗는 레이저
+    x - 50 + laserLength * leftEyeMouseDirection.x, y + 20 + laserLength * leftEyeMouseDirection.y
+  );
+
+  // 오른쪽 눈에서 쏘는 레이저 (x + 50, y)
+  triangle(
+    x + 50, y,
+    x + 50 + laserLength * rightEyeMouseDirection.x, y - 20 + laserLength * rightEyeMouseDirection.y,
+    x + 50 + laserLength * rightEyeMouseDirection.x, y + 20 + laserLength * rightEyeMouseDirection.y
+  );
+}
+
+function SuitOn(){
+
+    
+}
+
+function SuitOnPart1(){
+
+}
+function SuitOnPart2(){
+  
+}
+function SuitOnPart3(){
+  
+}
+function SuitOnPart4(){
+  
+}
+//#endregion

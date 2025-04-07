@@ -11,6 +11,15 @@ function setup() {
   frameRate(60);
 
   image(testImage , 0 ,0);
+
+
+  for (let i = 0;i < 5;i++){
+    console.log(f`${i} 흐이야아ㅡㅇ러`);
+  }
+
+  while (true){
+    
+  }
 }
 
 
