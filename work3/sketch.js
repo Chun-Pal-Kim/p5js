@@ -221,7 +221,7 @@ function keyPressed() {
 let lastShakeTime = 0; // 마지막으로 흔들림이 발생한 시간
 
 function SuitOn(x, y) {
-  let partDuration = 0.3; // 각 파츠가 입혀지는 데 걸리는 시간 (초)
+  let partDuration = 0.3; // 각 파츠가 입혀지는 데 걸리는 시간 
 
   if (suitOnTime > 0 && suitOnTime <= partDuration) {
     SuitOnPart1(x, y, suitOnTime / partDuration); // 왼쪽에서 날아오는 파츠
@@ -273,9 +273,9 @@ function applyShake() {
 }
 function SuitOnPart1(x, y, progress) {
   fill(200, 0, 0); // 빨간색
-  let startX = x - 300; // 왼쪽에서 시작
+  let startX = x - 300; 
   let currentX = lerp(startX, x - 120, progress); // 선형 보간
-  rect(currentX, y, 30, 100); // 왼쪽 얼굴 부분
+  rect(currentX, y, 30, 100); 
 
   // 회전된 사각형의 네 꼭짓점 계산
   let x1 = currentX - 16;
@@ -290,26 +290,25 @@ function SuitOnPart1(x, y, progress) {
   quad(x1, y1, x4, y4, x2, y2, x3, y3);
 
 
-  // 오른쪽으로 기울어진 사각형의 네 꼭짓점 계산
-  let x12 = currentX - 16; // 오른쪽으로 이동
+
+  let x12 = currentX - 16; 
   let y12 = y + 45;
-  let x22 = x12 + 50; // 오른쪽으로 이동
+  let x22 = x12 + 50;
   let y22 = y12 + 120;
   let x32 = x22 + 40;
   let y32 = y22;
   let x42 = x12 + 30;
   let y42 = y12;
 
-  // 오른쪽으로 기울어진 사각형 그리기
   quad(x12, y12, x22, y22, x32, y32, x42, y42);
 }
 function SuitOnPart2(x, y, progress) {
   fill(200, 0, 0); // 빨간색
-  let startX = x + 300; // 오른쪽에서 시작
+  let startX = x + 300;
   let currentX = lerp(startX, x + 120, progress); // 선형 보간
-  rect(currentX, y, 30, 100); // 오른쪽 얼굴 부분
+  rect(currentX, y, 30, 100); 
 
-  // 회전된 사각형의 네 꼭짓점 계산
+
   let x1 = currentX + 16;
   let y1 = y - 45;
   let x2 = x1 - 90;
@@ -319,10 +318,10 @@ function SuitOnPart2(x, y, progress) {
   let x4 = x1 - 28;
   let y4 = y1;
 
-  // 회전된 사각형 그리기
+
   quad(x1, y1, x4, y4, x2, y2, x3, y3);
 
-  // 왼쪽으로 기울어진 사각형의 네 꼭짓점 계산
+
   let x12 = currentX + 16; // 왼쪽으로 이동
   let y12 = y + 45;
   let x22 = x12 - 50; // 왼쪽으로 이동
@@ -332,13 +331,12 @@ function SuitOnPart2(x, y, progress) {
   let x42 = x12 - 30;
   let y42 = y12;
 
-  // 왼쪽으로 기울어진 사각형 그리기
   quad(x12, y12, x22, y22, x32, y32, x42, y42);
 }
 
 function SuitOnPart3(x, y, progress) {
   fill(200, 0, 0); // 빨간색
-  let startY = y + 300; // 아래에서 시작
+  let startY = y + 300;
   let currentY = lerp(startY, y + 150, progress); // 선형 보간
   rect(x, currentY, 130, 30); // 아래 얼굴 부분
 
