@@ -215,7 +215,7 @@ function keyPressed() {
   }
 
   if (key === 's') {
-    saveGif('Chun_Pal_Kim', 6);
+    saveGif('Chun_Pal_Kim', 10);
   }
 }
 let lastShakeTime = 0; // 마지막으로 흔들림이 발생한 시간
